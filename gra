@@ -1,0 +1,250 @@
+import java.util.Scanner;
+
+public class Gra {
+
+	public int numer;
+	public int pole;
+	public int wiersz=-1, kolumna=-1;
+	int [][] Plansza=  {{1,2,3},{4,5,6},{7,8,9}};
+	public char Tablica [][]= {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
+	
+	
+	private void 	graZKomputerem() 
+	{
+		
+			System.out.print("Oto wsp�rz�dne p�l:\n"+wy�wietlPlanszePocz�tkow�()+"\n Rozpocznijmy gr�!\n");
+			ruchU�ytkownika1();
+			System.out.print(wy�wietlTablice()+"\n");
+			ruchKomputera();
+			System.out.print(wy�wietlTablice()+"\n");
+	}
+	private void 	graZU�ytkownikiem() 
+	{
+		System.out.print("Oto wsp�rz�dne p�l:\n"+wy�wietlPlanszePocz�tkow�()+"\n Rozpocznijmy gr�!\n");
+		
+	}
+	
+
+	private void 	ruchU�ytkownika1() // dodac wyj�tek w kt�rym podano pole kt�re ju� jest zaj�te
+	{
+		
+		System.out.println("Podaj wspolrzedne dla kolka : ");
+		Scanner uzytkownik1 = new Scanner(System.in);
+		pole= uzytkownik1.nextInt();
+		if(pole>0 && pole<=9)
+		{
+			ustawienieZnacznika(pole);
+			Tablica[wiersz][kolumna]='O';
+		}
+		
+		else
+		{
+			System.out.print("Podano nie prawid�owe wsp�rz�dne. Sprobuj ponownie.");
+			ruchU�ytkownika1();
+		}
+	}
+	public void 	ruchKomputera() // narazie skopiowa�am to z tamtego programu. trzeba dodac �e je�eli komputer ma dwa w rz�dzie to pr�buje zagrac w r�g
+	{
+		for (int i=0; i<3; i++) {// sprawdzenie czy mo�e uzyska� 3 w rz�dzie pionowo lub poziomo
+			if (Tablica[i][0] == 'X' && Tablica[i][1] == 'X' && Tablica[i][2] == ' ') 
+			{
+			Tablica[i][2] = 'X';
+			return;
+			}
+			if (Tablica[i][0] == 'X' && Tablica[i][2] == 'X' && Tablica[i][1] == ' ') {
+			Tablica[i][1] = 'X';
+			return;
+			}
+			if (Tablica[i][2] == 'X' && Tablica[i][1] == 'X' && Tablica[i][0] == ' ') {
+			Tablica[i][0] = 'X';
+			return;
+			}  
+			if (Tablica[0][i] == 'X' && Tablica[1][i] == 'X' && Tablica[2][i] == ' ') {
+			Tablica[2][i] = 'X';
+			return;
+			}
+			if (Tablica[0][i] == 'X' && Tablica[2][i] == 'X' && Tablica[1][i] == ' ') {
+			Tablica[1][i] = 'X';
+			return;
+			}
+			if (Tablica[2][i] == 'X' && Tablica[1][i] == 'X' && Tablica[0][i] == ' ') {
+			Tablica[0][i] = 'X';
+			return;
+			}          
+			}
+		//sprawdzenie skos�w
+		if (Tablica[0][0] == 'X' && Tablica[1][1] == 'X' && Tablica[2][2] == ' ') {
+			Tablica[2][2] = 'X';
+			return;
+			}
+			if (Tablica[0][0] == 'X' && Tablica[2][2] == 'X' && Tablica[1][1] == ' ') {
+			Tablica[1][1] = 'X';
+			return;
+			}
+			if (Tablica[2][2] == 'X' && Tablica[1][1] == 'X' && Tablica[0][0] == ' ') {
+			Tablica[0][0] = 'X';
+			return;
+			}      
+			if (Tablica[0][2] == 'X' && Tablica[1][1] == 'X' && Tablica[2][0] == ' ') {
+			Tablica[2][0] = 'X';
+			return;
+			}
+			if (Tablica[0][2] == 'X' && Tablica[2][0] == 'X' && Tablica[1][1] == ' ') {
+			Tablica[1][1] = 'X';
+			return;
+			}
+			if (Tablica[2][0] == 'X' && Tablica[1][1] == 'X' && Tablica[0][2] == ' ') {
+			Tablica[0][2] = 'X';
+			return;
+			}   
+			//blokowanie u�ytkownika
+			for (int i=0; i<3; i++) {
+				if (Tablica[i][0] == 'O' && Tablica[i][1] == 'O' && Tablica[i][2] == ' ') {
+				Tablica[i][2] = 'X';
+				return;
+				}
+				if (Tablica[i][0] == 'O' && Tablica[i][2] == 'O' && Tablica[i][1] == ' ') {
+				Tablica[i][1] = 'X';
+				return;
+				}
+				if (Tablica[i][2] == 'O' && Tablica[i][1] == 'O' && Tablica[i][0] == ' ') {
+				Tablica[i][0] = 'X';
+				return;
+				}  
+				if (Tablica[0][i] == 'O' && Tablica[1][i] == 'O' && Tablica[2][i] == ' ') {
+				Tablica[2][i] = 'X';
+				return;
+				}
+				if (Tablica[0][i] == 'O' && Tablica[2][i] == 'O' && Tablica[1][i] == ' ') {
+				Tablica[1][i] = 'X';
+				return;
+				}
+				if (Tablica[2][i] == 'O' && Tablica[1][i] == 'O' && Tablica[0][i] == ' ') {
+				Tablica[0][i] = 'X';
+				return;
+				}          
+				}
+				if (Tablica[0][0] == 'O' && Tablica[1][1] == 'O' && Tablica[2][2] == ' ') {
+				Tablica[2][2] = 'X';
+				return;
+				}
+				if (Tablica[0][0] == 'O' && Tablica[2][2] == 'O' && Tablica[1][1] == ' ') {
+				Tablica[1][1] = 'X';
+				return;
+				}
+				if (Tablica[2][2] == 'O' && Tablica[1][1] == 'O' && Tablica[0][0] == ' ') {
+				Tablica[0][0] = 'X';
+				return;
+				}      
+				if (Tablica[0][2] == 'O' && Tablica[1][1] == 'O' && Tablica[2][0] == ' ') {
+				Tablica[2][0] = 'X';
+				return;
+				}
+				if (Tablica[0][2] == 'O' && Tablica[2][0] == 'O' && Tablica[1][1] == ' ') {
+				Tablica[1][1] = 'X';
+				return;
+				}
+				if (Tablica[2][0] == 'O' && Tablica[1][1] == 'O' && Tablica[0][2] == ' ') {
+				Tablica[0][2] = 'X';
+				return;
+				}  
+				//randomowe miejsce
+				
+				int r = (int)(Math.random()*8 )+1;
+				ustawienieZnacznika(r);
+				Tablica[wiersz][kolumna]='X';
+				
+	}
+	
+	private boolean sprawdzCzyWygrana() 
+	{
+		if (	(Tablica[0][0] == Tablica[1][0] && Tablica[1][0] == Tablica[2][0] && Tablica[2][0] != ' ') ||
+				(Tablica[0][1] == Tablica[1][1] && Tablica[1][1] == Tablica[2][1] && Tablica[2][1] != ' ') ||
+				(Tablica[0][2] == Tablica[1][2] && Tablica[1][2] == Tablica[2][2] && Tablica[2][2] != ' ') ||
+				(Tablica[0][0] == Tablica[0][1] && Tablica[0][1] == Tablica[0][2] && Tablica[0][2] != ' ') ||
+				(Tablica[1][0] == Tablica[1][1] && Tablica[1][1] == Tablica[1][2] && Tablica[1][2] != ' ') ||
+				(Tablica[2][0] == Tablica[2][1] && Tablica[2][1] == Tablica[2][2] && Tablica[2][2] != ' ') ||
+				(Tablica[0][0] == Tablica[1][1] && Tablica[1][1] == Tablica[2][2] && Tablica[2][2] != ' ') ||
+				(Tablica[0][2] == Tablica[1][1] && Tablica[1][1] == Tablica[2][0] && Tablica[2][0] != ' ')   ) 
+		{
+		//if (computer) {
+		System.out.println("Wygral komputer!");
+		//} else {
+		//System.out.println("Brawo, wygrales!");
+		}
+		return true;
+		}
+	private boolean sprawdzCzyRemis()
+	{
+		if (Tablica[0][0] != ' ' && Tablica[0][1] != ' ' && Tablica[0][2] != ' ' &&
+			Tablica[1][0] != ' ' && Tablica[1][1] != ' ' && Tablica[1][2] != ' ' &&
+			Tablica[2][0] != ' ' && Tablica[2][1] != ' ' && Tablica[2][2] != ' ')
+			System.out.println("Remis!");
+				return true;//nie wiem po co to
+	}
+	
+	private void 	ustawienieZnacznika(int p)
+	{
+		wiersz=-1;
+		kolumna=-1;
+		for (int w=0;w<3;w++)
+			for(int k=0;k<3;k++)
+			{
+				if(Plansza[w][k]==p)
+					{
+					wiersz=w;
+					kolumna=k;
+					break;
+					}
+			}
+	}
+	
+	public void 	wyb�rTrybuGry() 
+	{
+		Scanner czytelnik = new Scanner(System.in);
+		numer= czytelnik.nextInt();
+		
+		switch (numer) 
+		{
+		case 1: graZKomputerem();break;
+		case 2: graZU�ytkownikiem(); break;
+		default: {System.out.println("Nieprawidłowa liczba. Spróbuj ponownie\nWprowadz liczba: "); wyb�rTrybuGry(); }; // można dodać opcjć że gdy np. 3 razy wpisano z�y numer program konczy dzia�anie
+		}
+		czytelnik.close();
+	}	
+	
+	public String 	wyświetlTablice() 
+	{
+		String tablica="\t";
+		for (int w=0; w<3;w++)
+			{
+			if(w>0) tablica+="\t�   �   �\n\t";
+			for(int k=0; k<3;k++)
+			{
+				if (k!=2)
+				 tablica+=Tablica[w][k]+" | ";
+				 else tablica+=Tablica[w][k]+" \n";
+			}
+			}
+			
+			
+		return tablica;
+		
+	}
+	public String 	wyświetlPlanszePoczątkową() 
+	{
+		String plansza="\t";
+		for (int w=0; w<3;w++)
+			{
+			if(w>0) plansza+="�   �   �\n\t";
+			for(int k=0; k<3;k++)
+			{
+				if (k!=2)
+				 plansza+=Plansza[w][k]+" | ";
+				 else plansza+=Plansza[w][k]+" \n\t";
+			}
+			}
+		return plansza;
+		
+	}
+}
